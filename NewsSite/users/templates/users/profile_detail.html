@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} Пользователь {{ user }} {% endblock %}
+
+{% block header %}
+    {% include 'users/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="container">
+        <div class="row">
+            <!--    ЭТО ЛЕВАЯ КОЛОНКА КОНТЕНТА ПОСТА -->
+            <div class="col-lg-8">
+                <!--    ЭТО ТЕЛО ПОСТА -->
+                <br>
+                <img src="{{ request.user.account.account_image.url }}" alt="{{ request.user.username }}"
+                <hr>
+                <br>
+                <br>
+
+
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ request.user.username }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ request.user.email }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ request.user.account.phone }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ request.user.account.address }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <div class="card mt-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <img src="{% static 'main/img/vk.png' %}"
+                                             style="height:24px; width:auto;">
+                                        VK
+                                    </h6>
+                                    <span class="text-secondary">{{ request.user.account.vk }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round"
+                                             class="feather feather-instagram mr-2 icon-inline text-danger">
+                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                        </svg>
+                                        Instagram
+                                    </h6>
+                                    <span class="text-secondary">{{ request.user.account.instagram }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <img src="{% static 'main/img/telegram.png' %}"
+                                             style="height:24px; width:auto;">
+                                        Telegram
+                                    </h6>
+                                    <span class="text-secondary">{{ request.user.account.telegram }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <!--    ЭТО ПРАВАЯ КОЛОНКА -->
+            {% include './aside_users.html' %}
+        </div>
+    </div>
+</section>
+{% endblock %}

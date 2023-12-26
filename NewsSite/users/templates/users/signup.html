@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <form class="form-signin" method="post" >
+            <p class="lead">Для регистрации укажите имя пользователя и пароль</p>
+            <div class="col-md-4 mb-3 mx-auto">
+            {% csrf_token %}
+            {{ form|crispy }}
+            </div>
+            <button class="btn mt-2 btn-lg btn-outline-primary btn-block" type="submit">Регистрация</button>
+        </form>
+    </div>
+{% endblock %}

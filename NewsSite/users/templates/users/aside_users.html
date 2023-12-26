@@ -1,0 +1,15 @@
+{% load static %}
+<div class="col-md-4">
+    <div class="card my-4">
+        <h5 class="card-header">Редактировать профиль</h5>
+        <div class="card-body">
+            <a href="{% url 'profile_update' %}"class="btn btn-outline-primary btn-lg mt-4">Изменить</a>
+        </div>
+    </div>
+    <div class="card my-4">
+        <h5 class="card-header">Поменять пароль</h5>
+        <div class="card-body">
+            <a href="{% url 'password' %}" class="btn btn-outline-primary btn-lg mt-4">Изменить</a>
+        </div>
+    </div>
+</div>

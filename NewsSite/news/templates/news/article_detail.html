@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block header %}
+    {% include 'main/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="container">
+        <div class="row">
+            <!--    ЭТО ЛЕВАЯ КОЛОНКА  -->
+            <div class="col-lg-8">
+                <!--    ЭТО ТЕЛО ПОСТА -->
+                <br>
+                {% if user == article.author %}
+                <a href="{% url 'article_update' article.slug %}" class="card-link">Редактировать статью</a>
+                <a href="{% url 'articles_delete' article.slug %}" class="card-link">Удалить статью</a>
+                <br>
+                <hr>
+                {% else %}
+                <br>
+                 {% endif %}
+                <img class="img-fluid rounded " src="{{ article.thumbnail.url }}" alt="">
+                <hr>
+                <p class="lead">
+                    {{ article.text|safe }}
+                </p>
+
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <div class="lead">Автор: {{ article.author }}</div>
+                    <div>Опубликовано: {{ article.create }}</div>
+                </div>
+                <hr>
+                {% include 'news/comments/comments_list.html' %}
+            </div>
+<!--            ЭТО ПРАВАЯ КОЛОНКА-->
+            {% include './aside.html' %}
+        </div>
+    </div>
+</section>
+{% endblock %}

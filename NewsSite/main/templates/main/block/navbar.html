@@ -1,0 +1,62 @@
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+<section class="my-navigation">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light">
+        <div class="container-fluid">
+            <a href="{% url 'index' %}" class="navbar-brand">
+                <img src="https://lh6.googleusercontent.com/FNAcJVv7EwqfOfzw3DVQAfHhftBCqi6HCMA4mhpChuaOBY6sOFxsZbxf3j_pied27M2XQb8gcEfhn-bqQhi2jouUwP_69dS70JKVAcEuFA6G5_60ZqtnQsAFxjw4acvFUZ77UTUr8guTN8LpH2OthW0"
+                     width=auto height="49" alt="NuxtJS">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                        <h3 class="text-info-emphasis"> Новости нашего города </h3>
+                    </li>
+                    {% if request.get_full_path == '/' %}
+                    <a class="nav-link active" href="{% url 'index' %}">Главная</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'index' %}">Главная</a>
+                    {% endif %}
+                    <li class="nav-item ">
+                        <a href="{% url 'contact' %}" class="nav-link active">Контакты</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{% url 'about' %}" class="nav-link active">О нас</a>
+                    </li>
+
+                </div>
+                <form action="{% url 'search_results' %}" method="get" class="d-flex" role="search">
+                    <input name="q" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                    <button class="btn btn-outline-secondary me-2" type="submit">Найти</button>
+                </form>
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile_detail' request.user.profile.slug %}" class="navbar-text me-2">{{ user }}</a>
+                <a href="{% url 'user_articles' request.user.profile.slug %}" class="navbar-text me-2">Мои статьи</a>
+                <a href="{% url 'article_create' %}" class="navbar-text me-2">Добавить статью</a>
+                <a href="{% url 'logout' %}" class="btn btn-outline-secondary">Выход</a>
+                {% else %}
+                {% if request.get_full_path == '/signin/' %}
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary me-2 active">Войти</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary me-2">Войти</a>
+                {% endif %}
+                {% if request.get_full_path == '/signup/' %}
+                <a href="{% url 'register' %}" class="btn btn-outline-secondary me-2 active">Регистрация</a>
+                {% else %}
+                <a href="{% url 'register' %}" class="btn btn-outline-secondary me-2">Регистрация</a>
+                {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </nav>
+</section>

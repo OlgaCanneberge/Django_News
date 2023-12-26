@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Редактирование профиля {{ user }} {% endblock %}
+
+{% block header %}
+    {% include 'users/block/edit_header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="container">
+        <div class="row">
+            <!--    ЭТО ЛЕВАЯ КОЛОНКА КОНТЕНТА ПОСТА -->
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="col-lg-8">
+
+
+                <!--    ЭТО ТЕЛО ПОСТА -->
+                <br>
+                <class
+                ="rounded-circle" width="150">
+                <img src="{{ request.user.account.account_image.url }}" alt="{{ request.user.username }}">
+                <hr>
+                {{ account_form.account_image }}
+                <hr>
+                <br>
+                <br>
+
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">
+                            <img src="{% static 'main/img/vk.png' %}" style="height:24px; width:auto;">
+                        </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ account_form.vk }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="feather feather-instagram mr-2 icon-inline text-danger">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ account_form.instagram }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">
+                            <img src="{% static 'main/img/telegram.png' %}" style="height:24px; width:auto;">
+                        </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ account_form.telegram }}
+                    </div>
+                </div>
+                <hr>
+
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ user_form.username }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ user_form.email }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Телефон</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ account_form.phone }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Адрес</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ account_form.address }}
+                    </div>
+                </div>
+                <hr>
+
+
+                <div class="text-center">
+                    <button class="btn btn-outline-primary btn-lg mt-4" style="margin-bottom:15px;"
+                            href="{% url 'profile' %}"> Сохранить изменения
+                    </button>
+<!--                    <a class="btn btn-outline-danger" style="margin-bottom:15px;"-->
+<!--                       href="{% url 'password' %}"> Изменить пароль </a>-->
+                </div>
+
+            </div>
+            </form>
+
+
+            <!--    ЭТО ПРАВАЯ КОЛОНКА -->
+            <!--            {% include './aside_users.html' %}-->
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block header %}
+    {% include 'main/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="container">
+        <div class="row">
+            <!--    ЭТО ЛЕВАЯ КОЛОНКА  -->
+            <div class="col-lg-12">
+                <!--    ЭТО ТЕЛО ПОСТА -->
+                <br>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form }}
+                    <div class="d-grid gap-2 d-md-block mt-2">
+                        <button type="submit" class="btn btn-primary">Обновить статью</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

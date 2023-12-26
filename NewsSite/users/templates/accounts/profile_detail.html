@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} Пользователь {{ profile }} {% endblock %}
+
+{% block header %}
+    {% include 'users/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <figure>
+                <img src="{{ profile.avatar.url }}" class="img-fluid rounded-0" alt="{{ profile }}">
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <h5 class="card-title">
+                {{ profile }}
+            </h5>
+            <div class="card-text">
+                <ul>
+                    <li>Логин: {{ profile.user.username }}</li>
+                    {% if profile.user.get_full_name %}
+                    <li>Имя и фамилия: {{ profile.user.get_full_name }}</li>
+                    {% endif %}
+                    <li>Заходил: {{ profile.user.last_login }}</li>
+                    <li>Дата рождения: {{ profile.birth_date }}</li>
+                    <li>О себе: {{ profile.bio }}</li>
+                </ul>
+                <hr>
+                <a href="{% url 'profile_edit' %}" class="btn btn-primary">Редактировать профиль</a>
+                <a href="{% url 'password_change' %}" class="btn btn-primary">Сменить пароль</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+

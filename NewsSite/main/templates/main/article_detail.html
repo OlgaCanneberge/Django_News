@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} {{ article.h1 }} {% endblock %}
+
+{% block header %}
+    {% include 'main/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+    <section class="my-article-detail">
+        <div class="container">
+            <div class="row">
+                <!--    ЭТО ЛЕВАЯ КОЛОНКА КОНТЕНТА ПОСТА -->
+                <div class="col-lg-12">
+                    <!--    ЭТО ТЕЛО ПОСТА -->
+                    <br>
+                    <img class="img-fluid rounded " src="{{ article.image.url }}" alt="">
+                    <hr>
+                    <p class="lead">
+                        {{ article.content|safe }}
+                    </p>
+
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <div class="lead">Автор: {{ article.author }}</div>
+                        <div>Опубликовано: {{ article.created_at }}</div>
+                    </div>
+                    <hr>
+                </div>
+                <!--    ЭТО ПРАВАЯ КОЛОНКА -->
+<!--                {% include './aside.html' %}-->
+            </div>
+        </div>
+    </section>
+{% endblock %}

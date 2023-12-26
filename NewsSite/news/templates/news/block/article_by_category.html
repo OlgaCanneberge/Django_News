@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block header %}
+    {% include 'main/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="container">
+        <div class="row">
+            <!--    ЭТО ЛЕВАЯ КОЛОНКА -->
+
+            <div class="col-lg-8">
+                {% for article in articles %}
+                <br>
+                <br>
+                <h5 class="card-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h5>
+                <p class="card-text">{{ article.description }}</p>
+                <small>{{ article.author.username }}</small>
+                <br>
+                <small>{{ article.create }}</small>
+                <br>
+                <hr>
+                {% endfor %}
+            </div>
+
+            <!--            ЭТО ПРАВАЯ КОЛОНКА-->
+            {% include './aside.html' %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+{% block pagination %}
+    <section class="my-pagination">
+      <nav aria-label="Paginate me">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Предыдущая</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+                </li>
+            {% endif %}
+            {% for page_number in page_obj.paginator.page_range %}
+                {% if page_number == page_obj.number %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Следующая</a>
+                </li>
+            {% endif %}
+        </ul>
+      </nav>
+    </section>
+{% endblock %}

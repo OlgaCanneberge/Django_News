@@ -1,0 +1,18 @@
+{% load static %}
+<section class="my-carousel">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="background-color: #B0C4D9!important">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>
+                  {% if user %}
+                    Профиль пользователя {{ user }}
+                  {% else %}
+                    {{ title }}
+                  {% endif %}
+                </h1>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>

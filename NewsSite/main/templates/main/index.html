@@ -1,0 +1,74 @@
+{% extends './base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title %}Новости нашего города{% endblock %}
+
+{% block header %}
+    {% include './block/slider.html' %}
+{% endblock %}
+
+{% include 'main/includes/messages.html' %}
+
+{% block content %}
+    <div class="container">
+      <h1 class="my-3">Последние новости</h1>
+      <div class="row">
+        {% for article in page_obj %}
+        <div class="col-md-4">
+          <div class="card h-100 mb-4 shadow-sm">
+            <img src="{{ article.thumbnail.url }}" alt="" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">{{ article.title }}</h4>
+              {{ article.description|safe|truncatechars:100 }}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{{ article.get_absolute_url }}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                </div>
+                <small class="text-muted">{{ article.create }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+<br>
+<br>
+{% endblock %}
+
+{% block pagination %}
+    <section class="my-pagination">
+      <nav aria-label="Paginate me">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Предыдущая</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+                </li>
+            {% endif %}
+            {% for page_number in page_obj.paginator.page_range %}
+                {% if page_number == page_obj.number %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Следующая</a>
+                </li>
+            {% endif %}
+        </ul>
+      </nav>
+    </section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% load static %}
+{% load mptt_tags %}
+
+
+<div class="col-md-4">
+    <div class="card my-4">
+        <h5 class="card-header">Категории</h5>
+<!--        <div class="card mb-4">-->
+            <div class="card-body ">
+                {% full_tree_for_model news.Category as categories %}
+                <ul>
+                    {% recursetree categories %}
+                    <li>
+                        <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
+                    </li>
+                    {% if not node.is_leaf_node %}
+                    <ul>{% endif %}
+                        {{ children }}
+                        {% if not node.is_leaf_node %}
+                    </ul>
+                    {% endif %}
+                    {% endrecursetree %}
+                </ul>
+<!--            </div>-->
+        </div>
+    </div>
+<!--    <div class="card my-4">-->
+<!--        <h5 class="card-header"></h5>-->
+<!--        <div class="card-body">-->
+<!--&lt;!&ndash;            <h5 class="card-title">Раз пост</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p class="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный&ndash;&gt;-->
+<!--&lt;!&ndash;                текст.</p>&ndash;&gt;-->
+<!--            <a href="#" class="card-link">Редактировать статью</a>-->
+<!--            <br>-->
+<!--            <br>-->
+<!--            <a href="#" class="card-link">Удалить статью</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

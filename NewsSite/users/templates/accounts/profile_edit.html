@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block header %}
+    {% include 'main/block/header.html' %}
+{% endblock %}
+
+{% include 'main/includes/messages.html' %}
+
+
+{% block content %}
+<section class="my-article-detail">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <!--    ЭТО ТЕЛО ПОСТА -->
+            <br>
+      <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+         {{ user_form.as_p }}
+         {{ form.as_p }}
+         <div class="d-grid gap-2 d-md-block mt-2">
+            <button type="submit" class="btn btn-primary">Подтвердить изменение профиля</button>
+            <a class="btn btn-outline-primary" href="{% url 'profile_detail' request.user.profile.slug %}">Отмена</a>
+         </div>
+      </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
